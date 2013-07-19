@@ -1,0 +1,20 @@
+<h1><%= @post.title %></h1>
+<p><%= @post.contents %></p>
+
+<div class="comments">
+  <b>Comments</b>
+  <ul class="comments-list">
+    <% @post.comments.each do |comment| %>
+      <%= render :partial => "comments/comment", :locals => {:comment => comment} %>
+    <% end %>
+  </ul>
+
+  <p>Add a comment</p>
+  <%= form_for @post.comments.build do |f| %>
+    <%= f.hidden_field :post_id %>
+    <%= f.label :contents %>
+    <%= f.text_field :contents, :size => 120 %>
+    <%= submit_tag %>
+  <% end %>
+
+</div>
