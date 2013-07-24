@@ -11,12 +11,14 @@ class CommentsController < ApplicationController
         end
       end
 
-      format.js do
-        # for the js format, app/comments/create.js.erb will be rendered
-        # by default. no need to call render
+      format.json do
         @errors = []
-        if !@comment.save
-          errors << "Unable to save post"
+        if @comment.save
+          render :json => {:comment => render_to_string("comments/_comment.html",
+                           :layout => false,
+                           :locals => {:comment => @comment})}
+        else
+          render :json => {:error => "Unable to save post"}
         end
       end
     end
