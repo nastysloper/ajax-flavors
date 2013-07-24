@@ -10,7 +10,7 @@
   </ul>
 
   <p>Add a comment</p>
-  <%= form_for @post.comments.build, :remote => true do |f| %>
+  <%= form_for @post.comments.build do |f| %>
     <%= f.hidden_field :post_id %>
     <%= f.label :contents %>
     <%= f.text_field :contents, :size => 120 %>
